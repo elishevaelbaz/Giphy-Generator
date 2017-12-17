@@ -1,6 +1,43 @@
-
+var buttonList = ["dog", "cat", "rabbit", "bird", "hamster", "skunk", "goldfish", "ferret", 
+"turtle", "sugar glider", "chinchilla", "hedgehog", "hermit crab", "gerbil",
+"pygmy goat", "chicken", "capybara", "teacup pig", "serval", "salamander", "frog"];
 
 $(document).ready(function(){
+
+  function displayButtons() {
+    // deletes the buttons prior to addign new buttons
+    //to prevent duplicates
+    $("#animalButtons").empty();
+
+    for (var i = 0; i < buttonList.length; i++){
+
+      var a = $("<button>");
+          // Adds a class of movie to our button
+      a.addClass("animal-button");
+          // Added a data-attribute
+      a.attr("data-animal", buttonList[i]);
+          // Provided the initial button text
+      a.text(buttonList[i]);
+          // Added the button to the buttons-view div
+      $("#animalButtons").append(a);
+
+    }
+  }
+
+  $("#addAnimal").on("click", function(event) {
+
+        event.preventDefault();
+        // This line of code will grab the input from the textbox
+        var button = $("#animal-input").val().trim();
+        console.log("submit click function");
+
+        // The movie from the textbox is then added to our array
+        buttonList.push(button);
+
+        // Calling renderButtons which handles the processing of our movie array
+        displayButtons();
+
+      });
 
     $("button").on("click", function() {
       var animal = $(this).attr("data-animal");
@@ -26,8 +63,7 @@ $(document).ready(function(){
         animalImage.addClass("gif");
         animalImage.attr("src", results[i].images.fixed_height_still.url)
 
-        //give each img an id to refer to later
-        animalImage.attr("id", animal+i);
+        // animalImage.attr("id", animal+i);
         animalImage.attr("data-state", "still")
         animalImage.attr("data-animate", results[i].images.fixed_height.url)
         animalImage.attr("data-still", results[i].images.fixed_height_still.url)
@@ -36,6 +72,8 @@ $(document).ready(function(){
         // Prepend the animalDiv variable to the element with an id of animals.
         $("#animals").prepend(animalDiv);
 
+
+console.log("button click");
         }
 
       });
@@ -62,7 +100,13 @@ $(document).ready(function(){
 
         }
 
+        console.log("pause/animate")
+
      });
 
+     displayButtons();
+
 });
+
+
  
