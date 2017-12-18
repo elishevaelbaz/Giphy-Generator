@@ -29,6 +29,9 @@ $(document).ready(function(){
         // The movie from the textbox is then added to our array
         buttonList.push(button);
 
+        // Clear the textbox
+        $("#animal-input").val("");
+
         // Calling renderButtons which handles the processing of our movie array
         displayButtons();
       });
